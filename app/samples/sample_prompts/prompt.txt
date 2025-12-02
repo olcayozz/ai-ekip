@@ -1,0 +1,212 @@
+You are an expert in enterprise IT organizations and large-scale IT projects. 
+You will design a complete CrewAI configuration (crew, agents, tasks) AND simulate a realistic Turkish meeting transcript at the end.
+
+All MEETING CONTENT, AGENT DIALOGS, AND TRANSCRIPTS MUST BE IN TURKISH.
+All structural definitions (crew, agents, tasks) and technical fields must follow the JSON format described below.
+
+Follow these steps very carefully and do NOT skip any:
+
+1. LIST MEETING TYPES (ENTERPRISE IT CONTEXT)
+   - Consider a typical enterprise IT company or IT project (e.g., banking, telecom, e-commerce, public sector).
+   - List the main recurring meeting types that such organizations usually have. 
+   - Include at least (but not limited to) examples like:
+     - SteerCo (Steering Committee)
+     - Defect Triage
+     - Daily / Daily Scrum
+     - Sprint Planning
+     - Sprint Review
+     - Retrospective
+     - Release Planning
+     - Change Advisory Board (CAB)
+     - Incident Review / Post-Mortem
+     - Architecture Review Board
+     - UAT Meeting
+   - For each meeting type, think of:
+     - Its main purpose / business goal
+     - Its typical expected outcomes
+   - You will later use these as “topics” and “goals” to design tasks and meeting transcripts.
+
+2. DEFINE CREWS (ONE CREW PER MEETING TYPE)
+   - For each meeting type from step 1, define one CrewAI crew.
+   - Each crew will be responsible for running that specific kind of meeting and producing a realistic Turkish meeting transcript.
+   - Use a unique `id` and `name` per crew.
+   - `name` should clearly reflect the meeting type, for example:
+     - "Defect Triage Meeting Crew"
+     - "SteerCo Governance Meeting Crew"
+     - "Daily Scrum Crew"
+   - Use a reasonable default configuration for:
+     - `process` (e.g., "sequential")
+     - `verbose` (true)
+     - `memory` (true)
+     - `cache` (true)
+     - `planning` (false)
+     - `planning_llm` (null)
+     - `max_rpm` (1000)
+     - `manager_llm` (null)
+     - `manager_agent` (null)
+   - You can assume current datetime as `created_at`.
+
+3. LIST ROLES (ENTERPRISE IT ROLES)
+   - Think of a realistic enterprise IT project organization.
+   - List all key roles, for example (but not limited to):
+     - Developer
+     - Tech Lead / Team Lead
+     - QA / Test Engineer
+     - Test Lead
+     - Product Owner
+     - Scrum Master
+     - Project Manager
+     - Program Manager
+     - PMO
+     - Business Analyst
+     - Solution Architect
+     - Enterprise Architect
+     - DevOps Engineer
+     - Release Manager
+     - Incident Manager
+     - Service Delivery Manager
+     - Operations Engineer
+     - Data Engineer
+     - Data Architect
+     - Security Engineer
+     - UX/UI Designer
+   - These roles will be the basis for your CrewAI agents.
+
+4. DEFINE AGENTS (MAP ROLES TO AGENTS)
+   - For each crew, define a set of agents based on the roles from step 3.
+   - You DO NOT need to use all roles in every crew. Choose only the relevant roles per meeting type.
+     - Example:
+       - Daily Scrum Crew: Scrum Master, Developer, QA Engineer, Product Owner
+       - SteerCo Crew: Program Manager, PMO, Business Owner, Architect
+       - Defect Triage Crew: Incident Manager, Developer, QA, Service Delivery Manager
+   - For each agent in each crew:
+     - `id`: unique agent id (e.g. "A_XXXXXX").
+     - `role`: clear English role name plus context, e.g. 
+       - "Scrum Master - Daily Scrum Facilitator"
+       - "Developer - Backend Services"
+       - "QA Engineer - Test Execution & Defect Validation"
+     - `backstory`: 
+       - Describe the agent’s background and personality in English.
+       - BUT explicitly instruct that the agent will SPEAK ONLY IN TURKISH during meetings.
+       - Include speaking style (short/long messages, technical depth, formality).
+       - Example backstory:
+         - "You are an experienced Scrum Master in a Turkish enterprise banking project. You facilitate Daily Scrums and keep discussions focused. You always SPEAK IN TURKISH, using professional but concise language."
+     - `goal`: 
+       - Describe in English what this agent optimizes for in meetings.
+       - The goal should reflect their responsibilities in that specific meeting type.
+     - `allow_delegation`: false (unless you have a strong reason to enable it).
+     - `verbose`: true.
+     - `cache`: true.
+     - `llm_provider_model`: you may choose a reasonable default, e.g. "AbacusAI: openai/route-llm".
+     - `temperature`: 0.1 ~ 0.4 depending on how creative or deterministic you want them.
+     - `max_iter`: e.g. 25.
+     - `tool_ids`: [] (empty, unless you want to define tools).
+
+5. DEFINE TASKS PER CREW (MEETING GOALS AS TASKS)
+   - For each crew (meeting type), define multiple tasks that represent the logical flow of that meeting.
+   - Each task should:
+     - Be clearly linked to ONE agent via `agent_id`.
+     - Map to a realistic meeting step for that meeting type.
+   - For each task:
+     - `id`: unique task id.
+     - `description`: 
+       - In English, describe what the agent must do during that task.
+       - Explicitly state that the agent must speak/write IN TURKISH during execution.
+       - Describe how detailed their answer should be (e.g., 2–3 sentences, or detailed explanation, etc.).
+       - Example:
+         - "Facilitate the Daily Scrum opening in TURKISH. Greet everyone briefly, summarize the overall sprint goal in 2–3 sentences, and invite each team member to share their status."
+     - `expected_output`:
+       - Describe the expected form of the output (e.g., one message, summary, decision list).
+       - Specify that the content is in TURKISH.
+     - `async_execution`: false.
+     - `agent_id`: reference the correct agent.
+     - `context_from_async_tasks_ids`: null (or list if needed).
+     - `context_from_sync_tasks_ids`: null (or list if needed).
+     - `created_at`: you can set a plausible datetime string.
+
+   - Make sure that the set of tasks, when executed sequentially, can naturally produce a full meeting flow:
+     - Opening & agenda
+     - Discussion / status sharing / analysis
+     - Decisions and action items
+     - Closing summary
+
+6. MEETING TRANSCRIPT GENERATION REQUIREMENTS (TURKISH ONLY)
+   - The ultimate goal of these crews and tasks is to run meeting simulations and produce MEETING TRANSCRIPTS in TURKISH.
+   - Design tasks and agent backstories so that:
+     - Each agent clearly identifies themselves in the transcript by role or name.
+       - Example speech format:
+         - "Scrum Master: Bugünkü Daily'ye hoş geldiniz..."
+         - "Geliştirici (Backend): Dünkü çalışmamda..."
+     - Conversations should follow a NATURAL meeting flow:
+       - Dialog or monolog depending on the meeting type.
+         - Example:
+           - SteerCo: often more monolog + Q&A.
+           - Daily: round-robin dialog.
+           - Defect Triage: back-and-forth between Dev, QA, Ops.
+     - Language:
+       - Entire transcript must be in Turkish.
+       - Use corporate/enterprise Turkish, not slang.
+       - Use realistic terminology (ticket, incident, sprint, backlog, cutover, deployment, root cause analysis, vs.).
+     - Depth:
+       - Include enough detail so that the transcript looks like a real IT project meeting:
+         - reference to systems, environments (DEV, TEST, UAT, PROD),
+         - incident IDs, user stories, defects, SLAs, deadlines, dependencies, etc.
+
+7. OUTPUT FORMAT
+   - Your final answer must be a SINGLE VALID JSON OBJECT OR AN ARRAY OF JSON OBJECTS (if you choose to output multiple crews).
+   - Use the following schema per crew (this is an example, but you must adapt IDs, names, agents, tasks):
+
+   {
+     "id": "C_XXXXXX",
+     "name": "Meaningful Crew Name",
+     "process": "sequential",
+     "verbose": true,
+     "memory": true,
+     "cache": true,
+     "planning": false,
+     "planning_llm": null,
+     "max_rpm": 1000,
+     "manager_llm": null,
+     "manager_agent": null,
+     "created_at": "2025-12-02T18:01:29.916422",
+     "agents": [
+       {
+         "id": "A_XXXXXX",
+         "role": "Role Name - Short Context",
+         "backstory": "English background & behavior description. MUST clearly say that the agent will speak only in TURKISH in meetings.",
+         "goal": "English description of this agent's meeting goal and behavior.",
+         "allow_delegation": false,
+         "verbose": true,
+         "cache": true,
+         "llm_provider_model": "AbacusAI: openai/route-llm",
+         "temperature": 0.2,
+         "max_iter": 25,
+         "tool_ids": []
+       }
+       // ... more agents
+     ],
+     "tasks": [
+       {
+         "id": "T_XXXXXX",
+         "description": "In English: Explain what the agent should do in this step, and explicitly instruct that all spoken content must be in TURKISH.",
+         "expected_output": "Describe the expected kind of message(s) in TURKISH (e.g. 'Short Turkish greeting and agenda summary').",
+         "async_execution": false,
+         "agent_id": "A_XXXXXX",
+         "context_from_async_tasks_ids": null,
+         "context_from_sync_tasks_ids": null,
+         "created_at": "2025-12-02T18:04:45.954998"
+       }
+       // ... more tasks
+     ],
+     "tools": []
+   }
+
+   - Do NOT include any explanatory text outside of JSON.
+   - Ensure the output is syntactically valid JSON (no comments, no trailing commas).
+
+IMPORTANT CONSTRAINTS:
+- All meeting simulations and transcripts must be in TURKISH.
+- All agents must be defined so that it is clear which agent is speaking at each point in the transcript (by name or role).
+- Meeting flows should be realistic and aligned with the specific meeting type objectives.
+- Avoid generic or toy examples; use real-world enterprise IT terminology and scenarios.
+- AS A START CHOOSE ONLY ONE MEETING TYPE AS AN EXAMPLE AND PRODUCE RELEVANT JSON OBJECT.

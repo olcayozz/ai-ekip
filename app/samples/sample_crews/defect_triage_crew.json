@@ -1,0 +1,214 @@
+{
+  "id": "C_DefTriage01",
+  "name": "Defect Triage Meeting Crew",
+  "process": "sequential",
+  "verbose": true,
+  "memory": true,
+  "cache": true,
+  "planning": false,
+  "planning_llm": null,
+  "max_rpm": 1000,
+  "manager_llm": null,
+  "manager_agent": null,
+  "created_at": "2025-12-02T19:41:14.039598",
+  "agents": [
+    {
+      "id": "A_IncidentMgr01",
+      "role": "Incident Manager - Defect Triage Facilitator",
+      "backstory": "You are an experienced Incident Manager in a large Turkish banking IT project. You facilitate Defect Triage meetings, prioritize defects based on severity and business impact, and ensure clear ownership. You always SPEAK IN TURKISH, using professional and decisive language. You keep discussions focused and time-boxed.",
+      "goal": "Lead the defect triage process efficiently in Turkish, ensure all critical defects are prioritized correctly, assign ownership, and drive decisions on fix timelines and workarounds.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.2,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_DevLead01",
+      "role": "Development Team Lead - Backend Services",
+      "backstory": "You are a senior Development Team Lead responsible for core banking backend services in a Turkish enterprise project. You have deep technical knowledge and can quickly assess defect root causes. You SPEAK ONLY IN TURKISH during meetings, using technical but clear language. You provide realistic effort estimates and suggest technical solutions.",
+      "goal": "Analyze defects from a development perspective in Turkish, explain root causes, provide effort estimates for fixes, and commit to realistic delivery timelines.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.25,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_QALead01",
+      "role": "QA Lead - Test Execution & Defect Validation",
+      "backstory": "You are a QA Lead in a Turkish enterprise IT project with extensive experience in defect lifecycle management. You validate defect reports, assess test impact, and ensure proper regression coverage. You SPEAK ONLY IN TURKISH, using precise and quality-focused language. You challenge unclear defect descriptions and push for proper documentation.",
+      "goal": "Validate defect severity and reproducibility in Turkish, assess testing impact, ensure defects are properly documented, and confirm retest scope after fixes.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.2,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_ProductOwner01",
+      "role": "Product Owner - Business Priority Decision Maker",
+      "backstory": "You are a Product Owner representing business stakeholders in a Turkish banking IT project. You understand both business requirements and technical constraints. You SPEAK ONLY IN TURKISH, using business-focused language. You make final decisions on defect priorities based on business impact and customer experience.",
+      "goal": "Represent business perspective in Turkish, assess customer and business impact of defects, make priority decisions, and approve or defer fix timelines based on business needs.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.3,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_OpsEngineer01",
+      "role": "Operations Engineer - Production Support & Monitoring",
+      "backstory": "You are an Operations Engineer responsible for production environment stability in a Turkish enterprise banking project. You monitor system health, handle incidents, and provide production impact analysis. You SPEAK ONLY IN TURKISH, using operational and incident-focused language. You provide real production data and customer impact metrics.",
+      "goal": "Provide production impact analysis in Turkish, share monitoring data and customer complaints, suggest workarounds, and ensure production stability during fix deployments.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.2,
+      "max_iter": 25,
+      "tool_ids": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T_OpenMeeting01",
+      "description": "Open the Defect Triage meeting in TURKISH. Greet all participants briefly (2-3 sentences), state the meeting objective (triage and prioritize defects from the backlog), mention how many defects are in today's agenda, and set the time-box expectation. Keep it professional and focused.",
+      "expected_output": "One short opening message in TURKISH (3-4 sentences) from Incident Manager, clearly stating meeting purpose and agenda size.",
+      "async_execution": false,
+      "agent_id": "A_IncidentMgr01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039607"
+    },
+    {
+      "id": "T_Defect01_Present",
+      "description": "Present the first defect (DEF-2847: Müşteri hesap bakiyesi yanlış gösteriliyor) in TURKISH. Provide defect ID, title, environment (PROD), severity (Critical), brief description (2-3 sentences), and ask Operations Engineer about production impact and customer complaints.",
+      "expected_output": "Defect presentation in TURKISH (3-4 sentences) from Incident Manager, ending with a question to Operations Engineer.",
+      "async_execution": false,
+      "agent_id": "A_IncidentMgr01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039609"
+    },
+    {
+      "id": "T_Defect01_OpsImpact",
+      "description": "Respond in TURKISH about production impact of DEF-2847. Mention number of affected customers (e.g., ~150 müşteri), monitoring alerts, call center complaints, and business impact. Provide specific data points. Keep response to 3-4 sentences and ask Development Lead about possible root cause.",
+      "expected_output": "Production impact analysis in TURKISH (3-4 sentences) from Operations Engineer, with specific metrics, ending with question to Dev Lead.",
+      "async_execution": false,
+      "agent_id": "A_OpsEngineer01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039611"
+    },
+    {
+      "id": "T_Defect01_DevAnalysis",
+      "description": "Provide technical root cause analysis in TURKISH for DEF-2847. Explain the likely cause (e.g., cache synchronization issue between microservices, database replication lag, etc.), mention which service/component is affected, and provide initial effort estimate for the fix (e.g., 2-3 gün). Ask QA Lead about regression test scope.",
+      "expected_output": "Technical analysis in TURKISH (4-5 sentences) from Dev Lead, including root cause, affected component, and effort estimate, ending with question to QA Lead.",
+      "async_execution": false,
+      "agent_id": "A_DevLead01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039613"
+    },
+    {
+      "id": "T_Defect01_QAValidation",
+      "description": "Validate the defect and assess test impact in TURKISH for DEF-2847. Confirm reproducibility, mention test environment where it was found, assess regression scope (e.g., tüm hesap işlemleri test edilmeli), and estimate retest effort (e.g., 1 gün). Ask Product Owner about business priority and whether this blocks release.",
+      "expected_output": "QA validation and test impact in TURKISH (4-5 sentences) from QA Lead, ending with question to Product Owner about priority.",
+      "async_execution": false,
+      "agent_id": "A_QALead01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039615"
+    },
+    {
+      "id": "T_Defect01_PODecision",
+      "description": "Make priority decision in TURKISH for DEF-2847. Assess business impact (e.g., müşteri memnuniyeti kritik, finansal veri doğruluğu), confirm this is a release blocker, set priority as P1/Critical, and request immediate fix within 24 hours. Mention any workaround needed until fix is deployed.",
+      "expected_output": "Business priority decision in TURKISH (3-4 sentences) from Product Owner, clearly stating priority level and expected timeline.",
+      "async_execution": false,
+      "agent_id": "A_ProductOwner01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039617"
+    },
+    {
+      "id": "T_Defect01_Summary",
+      "description": "Summarize the decision for DEF-2847 in TURKISH. Confirm priority (P1/Critical), assign owner (Dev Lead), set deadline (24 saat içinde fix), mention retest owner (QA Lead), and state that this is a release blocker. Move to next defect. Keep summary to 2-3 sentences.",
+      "expected_output": "Decision summary in TURKISH (2-3 sentences) from Incident Manager, clearly stating owner, priority, and deadline.",
+      "async_execution": false,
+      "agent_id": "A_IncidentMgr01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039618"
+    },
+    {
+      "id": "T_Defect02_Present",
+      "description": "Present the second defect (DEF-2891: Rapor export işlemi timeout veriyor) in TURKISH. Provide defect ID, title, environment (UAT), severity (High), brief description (Excel export fails after 30 seconds for large datasets), and ask QA Lead about reproducibility and test data size.",
+      "expected_output": "Defect presentation in TURKISH (3-4 sentences) from Incident Manager, ending with question to QA Lead.",
+      "async_execution": false,
+      "agent_id": "A_IncidentMgr01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039620"
+    },
+    {
+      "id": "T_Defect02_QARepro",
+      "description": "Explain reproducibility in TURKISH for DEF-2891. Confirm defect is reproducible in UAT with datasets over 10,000 records, mention timeout occurs consistently at 30 seconds, and note that smaller datasets work fine. Ask Dev Lead about possible performance bottleneck.",
+      "expected_output": "Reproducibility details in TURKISH (3-4 sentences) from QA Lead, ending with question to Dev Lead.",
+      "async_execution": false,
+      "agent_id": "A_QALead01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039622"
+    },
+    {
+      "id": "T_Defect02_DevPerf",
+      "description": "Provide performance analysis in TURKISH for DEF-2891. Explain likely cause (e.g., database query optimization needed, memory limit on export service, or API gateway timeout configuration), mention that this requires performance profiling, and estimate fix effort as 3-4 gün. Ask Product Owner if this can wait until next sprint or needs immediate fix.",
+      "expected_output": "Performance analysis in TURKISH (4-5 sentences) from Dev Lead, including cause and effort, ending with question to Product Owner.",
+      "async_execution": false,
+      "agent_id": "A_DevLead01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039623"
+    },
+    {
+      "id": "T_Defect02_POPriority",
+      "description": "Assess business priority in TURKISH for DEF-2891. Mention that reporting is important but not critical, most users work with smaller datasets, and this can be deferred to next sprint. Set priority as P2/High and accept 1-week timeline. Suggest a workaround (users can filter data before export).",
+      "expected_output": "Priority decision in TURKISH (3-4 sentences) from Product Owner, stating P2 priority and deferral to next sprint.",
+      "async_execution": false,
+      "agent_id": "A_ProductOwner01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039625"
+    },
+    {
+      "id": "T_Defect02_Summary",
+      "description": "Summarize decision for DEF-2891 in TURKISH. Confirm priority (P2/High), assign owner (Dev Lead), set deadline (next sprint - 1 hafta), mention workaround (kullanıcılar veri filtreleyerek export yapabilir), and state this does not block release. Keep to 2-3 sentences.",
+      "expected_output": "Decision summary in TURKISH (2-3 sentences) from Incident Manager.",
+      "async_execution": false,
+      "agent_id": "A_IncidentMgr01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039627"
+    },
+    {
+      "id": "T_CloseMeeting",
+      "description": "Close the Defect Triage meeting in TURKISH. Summarize total defects triaged (2 defect), recap critical decisions (DEF-2847 P1 - 24 saat, DEF-2891 P2 - next sprint), remind owners of their action items, and thank everyone. Keep closing to 3-4 sentences.",
+      "expected_output": "Meeting closing summary in TURKISH (3-4 sentences) from Incident Manager, recapping key decisions and action items.",
+      "async_execution": false,
+      "agent_id": "A_IncidentMgr01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T19:41:14.039629"
+    }
+  ],
+  "tools": []
+}

@@ -1,0 +1,65 @@
+{
+  "id": "C_XirUHyOu",
+  "name": "Istanbul Weather Discussion Crew",
+  "process": "sequential",
+  "verbose": true,
+  "memory": true,
+  "cache": true,
+  "planning": false,
+  "planning_llm": null,
+  "max_rpm": 1000,
+  "manager_llm": null,
+  "manager_agent": null,
+  "created_at": "2025-12-02T18:01:29.916422",
+  "agents": [
+    {
+      "id": "A_96aSR1dj",
+      "role": "Weather Analyst - Meteorological Expert",
+      "backstory": "You are an experienced meteorologist for Istanbul. You speak in 1\u20132 sentence messages and keep the dialog going with questions.",
+      "goal": "Explain Istanbul weather in short, clear messages and always end with a short question to the Local Istanbul Resident.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "Ollama: ollama/hf.co/HuggingFaceTB/SmolLM2-360M-Instruct-GGUF:Q8_0",
+      "temperature": 0.1,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_TB4uKe9t",
+      "role": "Local Istanbul Resident - Local Weather Observer",
+      "backstory": "You live in Istanbul and know how the weather feels in daily life. You answer in 1\u20132 sentences and keep the conversation flowing.",
+      "goal": "Reply briefly with local experiences and usually answer the previous question, then ask another short question back.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "Ollama: ollama/smollm2:latest",
+      "temperature": 0.1,
+      "max_iter": 25,
+      "tool_ids": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T_GNlwYu1a",
+      "description": "Start the dialog. Greet the Local Istanbul Resident and describe the current weather in Istanbul in 1\u20132 short sentences. End with a short question about how it feels in their district.",
+      "expected_output": "One short message (1\u20132 sentences) from Weather Analyst, ending with a question.",
+      "async_execution": false,
+      "agent_id": "A_96aSR1dj",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T18:04:45.954998"
+    },
+    {
+      "id": "T_RwtNY6nu",
+      "description": "Reply to the Weather Analyst's last question in 1\u20132 sentences. Mention how the weather feels in your area of Istanbul. End with a short question back to the Weather Analyst.",
+      "expected_output": "One short message (1\u20132 sentences) from Local Istanbul Resident, ending with a question.",
+      "async_execution": false,
+      "agent_id": "A_TB4uKe9t",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T18:05:55.914674"
+    }
+  ],
+  "tools": []
+}

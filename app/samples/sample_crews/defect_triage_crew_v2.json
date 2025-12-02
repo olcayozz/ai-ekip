@@ -1,0 +1,330 @@
+{
+  "id": "C_DefTriage02",
+  "name": "Enterprise E-Commerce Defect Triage Crew",
+  "process": "sequential",
+  "verbose": true,
+  "memory": true,
+  "cache": true,
+  "planning": false,
+  "planning_llm": null,
+  "max_rpm": 1000,
+  "manager_llm": null,
+  "manager_agent": null,
+  "created_at": "2025-12-02T20:46:58.436956",
+  "agents": [
+    {
+      "id": "A_ScrumMaster01",
+      "role": "Scrum Master - Defect Triage Coordinator",
+      "backstory": "You are an experienced Scrum Master in a large Turkish e-commerce platform project. You coordinate defect triage sessions, ensure balanced workload distribution, and maintain team morale. You always SPEAK IN TURKISH, using collaborative and empathetic language. You focus on removing impediments and facilitating healthy discussions.",
+      "goal": "Facilitate defect triage efficiently in Turkish, ensure team consensus on priorities, balance workload across team members, and maintain a sustainable pace while meeting business commitments.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.25,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_FrontendDev01",
+      "role": "Senior Frontend Developer - React & Mobile",
+      "backstory": "You are a senior Frontend Developer specializing in React and mobile applications for a Turkish e-commerce platform. You handle UI/UX defects, performance issues, and cross-browser compatibility. You SPEAK ONLY IN TURKISH, using clear technical language with focus on user experience. You are detail-oriented about visual and interaction bugs.",
+      "goal": "Analyze frontend defects in Turkish, assess UI/UX impact, provide accurate effort estimates for frontend fixes, and ensure consistent user experience across all platforms.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.3,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_BackendDev01",
+      "role": "Backend Developer - Microservices & APIs",
+      "backstory": "You are a Backend Developer working on microservices architecture for a Turkish e-commerce platform. You handle API defects, data consistency issues, and integration problems. You SPEAK ONLY IN TURKISH, using precise technical terminology. You focus on system reliability and data integrity.",
+      "goal": "Analyze backend and API defects in Turkish, identify root causes in microservices, provide effort estimates, and ensure data consistency and system stability.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.25,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_QAEngineer01",
+      "role": "QA Engineer - Automation & Manual Testing",
+      "backstory": "You are a QA Engineer in a Turkish e-commerce project with expertise in both manual and automated testing. You report defects with detailed reproduction steps, assess regression risk, and maintain test automation suites. You SPEAK ONLY IN TURKISH, using methodical and evidence-based language. You always provide clear reproduction steps and test data.",
+      "goal": "Present defects with clear reproduction steps in Turkish, validate severity based on test evidence, assess regression scope, and ensure proper test coverage after fixes.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.2,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_TechLead01",
+      "role": "Technical Lead - Architecture & Technical Decisions",
+      "backstory": "You are a Technical Lead overseeing the architecture of a Turkish e-commerce platform. You make technical decisions, assess architectural impact of defects, and ensure technical debt is managed. You SPEAK ONLY IN TURKISH, using strategic and architecture-focused language. You balance quick fixes with long-term technical health.",
+      "goal": "Provide architectural perspective in Turkish, assess technical debt implications, guide technical decisions on fixes vs. workarounds, and ensure system scalability and maintainability.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.3,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_ProductManager01",
+      "role": "Product Manager - Customer Experience & Business Value",
+      "backstory": "You are a Product Manager for a Turkish e-commerce platform with deep understanding of customer behavior and business metrics. You prioritize based on customer impact, revenue implications, and strategic goals. You SPEAK ONLY IN TURKISH, using customer-centric and data-driven language. You reference analytics, conversion rates, and customer feedback.",
+      "goal": "Prioritize defects based on customer impact in Turkish, assess business and revenue implications, make final priority decisions, and balance customer experience with development capacity.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.35,
+      "max_iter": 25,
+      "tool_ids": []
+    },
+    {
+      "id": "A_DevOps01",
+      "role": "DevOps Engineer - Infrastructure & Deployment",
+      "backstory": "You are a DevOps Engineer managing infrastructure and CI/CD pipelines for a Turkish e-commerce platform. You handle deployment-related defects, infrastructure issues, and monitoring. You SPEAK ONLY IN TURKISH, using infrastructure and operations-focused language. You provide insights from monitoring tools and deployment logs.",
+      "goal": "Analyze infrastructure and deployment defects in Turkish, provide production metrics and monitoring data, assess deployment risks, and ensure smooth release processes.",
+      "allow_delegation": false,
+      "verbose": true,
+      "cache": true,
+      "llm_provider_model": "AbacusAI: openai/route-llm",
+      "temperature": 0.2,
+      "max_iter": 25,
+      "tool_ids": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T_OpenSession01",
+      "description": "Open the Defect Triage session in TURKISH. Welcome the team warmly (2-3 sentences), state the session objective (triage 4 defects from this week's backlog), mention current sprint context (Sprint 23, 3 days remaining), and set a collaborative tone. Emphasize team input and consensus.",
+      "expected_output": "Warm opening message in TURKISH (3-4 sentences) from Scrum Master, setting collaborative tone and context.",
+      "async_execution": false,
+      "agent_id": "A_ScrumMaster01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436967"
+    },
+    {
+      "id": "T_Defect01_QAPresent",
+      "description": "Present defect DEF-3421 in TURKISH: 'Sepete eklenen ürün sayısı mobil uygulamada güncellenmiyor'. Provide detailed reproduction steps (iOS 17, specific product categories affected), mention it's reproducible 100% in TEST environment, severity assessment (High - affects checkout flow), and ask Frontend Developer about possible cause.",
+      "expected_output": "Detailed defect presentation in TURKISH (4-5 sentences) from QA Engineer with clear repro steps, ending with question to Frontend Dev.",
+      "async_execution": false,
+      "agent_id": "A_QAEngineer01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436970"
+    },
+    {
+      "id": "T_Defect01_FrontendAnalysis",
+      "description": "Analyze DEF-3421 in TURKISH from frontend perspective. Explain likely cause (state management issue in React Native, Redux store not updating cart badge), mention this affects only iOS due to platform-specific rendering, estimate fix effort (1-2 gün including testing), and ask DevOps about production occurrence rate.",
+      "expected_output": "Frontend technical analysis in TURKISH (4-5 sentences) from Frontend Dev, including cause and estimate, ending with question to DevOps.",
+      "async_execution": false,
+      "agent_id": "A_FrontendDev01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436972"
+    },
+    {
+      "id": "T_Defect01_DevOpsMetrics",
+      "description": "Provide production metrics in TURKISH for DEF-3421. Share monitoring data (approximately 8% of iOS users affected based on analytics, 234 incomplete checkout sessions last week potentially related), mention no critical errors in logs but user behavior indicates confusion, and ask Product Manager about customer complaints and business impact.",
+      "expected_output": "Production metrics and monitoring data in TURKISH (4-5 sentences) from DevOps, ending with question to Product Manager.",
+      "async_execution": false,
+      "agent_id": "A_DevOps01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436974"
+    },
+    {
+      "id": "T_Defect01_PMPriority",
+      "description": "Assess business impact in TURKISH for DEF-3421. Reference customer support tickets (47 tickets last week about cart issues on iOS), mention potential revenue impact (estimated 15-20K TL lost sales weekly), state that iOS users represent 35% of mobile traffic, and set priority as P1/Critical with request for fix in current sprint.",
+      "expected_output": "Business impact assessment in TURKISH (4-5 sentences) from Product Manager, clearly stating priority and urgency.",
+      "async_execution": false,
+      "agent_id": "A_ProductManager01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436975"
+    },
+    {
+      "id": "T_Defect01_Summary",
+      "description": "Summarize decision for DEF-3421 in TURKISH. Confirm priority (P1/Critical), assign to Frontend Developer, set deadline (current sprint - 2 gün), mention QA retest owner, and acknowledge team consensus. Keep to 2-3 sentences with positive tone.",
+      "expected_output": "Decision summary in TURKISH (2-3 sentences) from Scrum Master, confirming assignment and timeline.",
+      "async_execution": false,
+      "agent_id": "A_ScrumMaster01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436977"
+    },
+    {
+      "id": "T_Defect02_QAPresent",
+      "description": "Present defect DEF-3445 in TURKISH: 'Ödeme sayfasında kredi kartı bilgileri kaydedilmiyor'. Provide reproduction steps (affects all browsers, PROD environment), mention security concern (users must re-enter card info every time), severity (Critical - payment flow), and ask Backend Developer about API or database issue.",
+      "expected_output": "Defect presentation in TURKISH (4-5 sentences) from QA Engineer, ending with question to Backend Dev.",
+      "async_execution": false,
+      "agent_id": "A_QAEngineer01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436979"
+    },
+    {
+      "id": "T_Defect02_BackendAnalysis",
+      "description": "Analyze DEF-3445 in TURKISH from backend perspective. Explain root cause (payment-service microservice not persisting tokenized card data, database transaction rollback issue), mention this is a regression from last deployment, estimate fix effort (2-3 gün including security review), and ask Tech Lead about architectural implications.",
+      "expected_output": "Backend analysis in TURKISH (4-5 sentences) from Backend Dev, including root cause and effort, ending with question to Tech Lead.",
+      "async_execution": false,
+      "agent_id": "A_BackendDev01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436981"
+    },
+    {
+      "id": "T_Defect02_TechLeadView",
+      "description": "Provide architectural perspective in TURKISH for DEF-3445. Mention this exposes a gap in transaction management pattern, recommend proper fix (implement saga pattern for payment transactions) vs. quick patch, note that quick fix is possible but adds technical debt, and ask Product Manager about timeline flexibility given architectural considerations.",
+      "expected_output": "Architectural analysis in TURKISH (4-5 sentences) from Tech Lead, balancing quick fix vs. proper solution, ending with question to PM.",
+      "async_execution": false,
+      "agent_id": "A_TechLead01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436982"
+    },
+    {
+      "id": "T_Defect02_PMDecision",
+      "description": "Make priority decision in TURKISH for DEF-3445. Acknowledge this is critical (payment flow blocker, affects conversion rate), but state that users can still complete purchases (just inconvenient), request quick fix now (2-3 gün) and proper architectural fix in next sprint, set priority as P1 but accept phased approach.",
+      "expected_output": "Priority decision in TURKISH (4-5 sentences) from Product Manager, accepting phased fix approach.",
+      "async_execution": false,
+      "agent_id": "A_ProductManager01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436984"
+    },
+    {
+      "id": "T_Defect02_Summary",
+      "description": "Summarize decision for DEF-3445 in TURKISH. Confirm priority (P1/Critical), assign to Backend Developer for quick fix (current sprint - 3 gün), create follow-up story for architectural improvement (next sprint), and thank Tech Lead for architectural guidance. Keep to 3-4 sentences.",
+      "expected_output": "Decision summary in TURKISH (3-4 sentences) from Scrum Master, confirming phased approach.",
+      "async_execution": false,
+      "agent_id": "A_ScrumMaster01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436986"
+    },
+    {
+      "id": "T_Defect03_QAPresent",
+      "description": "Present defect DEF-3467 in TURKISH: 'Arama sonuçları yanlış sıralanıyor - fiyat filtreleri çalışmıyor'. Provide details (search results ignore price range filters, affects all product categories, UAT environment), mention this is a new feature regression, severity (Medium - search functionality), and ask Backend Developer about search service issue.",
+      "expected_output": "Defect presentation in TURKISH (4-5 sentences) from QA Engineer, ending with question to Backend Dev.",
+      "async_execution": false,
+      "agent_id": "A_QAEngineer01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436987"
+    },
+    {
+      "id": "T_Defect03_BackendAnalysis",
+      "description": "Analyze DEF-3467 in TURKISH. Explain cause (Elasticsearch query builder not applying price range filters correctly, mapping issue after index update), estimate fix effort (1 gün for query fix + reindexing), mention this is straightforward, and ask Product Manager about priority given other critical defects.",
+      "expected_output": "Backend analysis in TURKISH (3-4 sentences) from Backend Dev, ending with question to PM about priority.",
+      "async_execution": false,
+      "agent_id": "A_BackendDev01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436989"
+    },
+    {
+      "id": "T_Defect03_PMPriority",
+      "description": "Assess priority in TURKISH for DEF-3467. Mention that search is important for user experience but users can still browse categories, note that this affects product discoverability and potentially conversion, set priority as P2/High, and accept deferral to next sprint given current P1 workload.",
+      "expected_output": "Priority decision in TURKISH (3-4 sentences) from Product Manager, setting P2 and deferring to next sprint.",
+      "async_execution": false,
+      "agent_id": "A_ProductManager01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436991"
+    },
+    {
+      "id": "T_Defect03_Summary",
+      "description": "Summarize decision for DEF-3467 in TURKISH. Confirm priority (P2/High), assign to Backend Developer, defer to next sprint (1 hafta), and acknowledge this is the right balance given current workload. Keep to 2 sentences.",
+      "expected_output": "Decision summary in TURKISH (2 sentences) from Scrum Master.",
+      "async_execution": false,
+      "agent_id": "A_ScrumMaster01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436993"
+    },
+    {
+      "id": "T_Defect04_QAPresent",
+      "description": "Present defect DEF-3489 in TURKISH: 'Sipariş takip sayfası yavaş yükleniyor - 5+ saniye'. Provide performance data (page load time 5-8 seconds, affects all users, PROD environment), mention this is a gradual degradation over last 2 weeks, severity (Medium - performance), and ask DevOps about infrastructure metrics.",
+      "expected_output": "Defect presentation in TURKISH (4-5 sentences) from QA Engineer with performance data, ending with question to DevOps.",
+      "async_execution": false,
+      "agent_id": "A_QAEngineer01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436994"
+    },
+    {
+      "id": "T_Defect04_DevOpsMetrics",
+      "description": "Provide infrastructure analysis in TURKISH for DEF-3489. Share monitoring data (database query time increased from 200ms to 4+ seconds, order-tracking-service CPU at 85%, no infrastructure issues), mention this looks like database query optimization problem, and ask Backend Developer about recent changes to order queries.",
+      "expected_output": "Infrastructure metrics in TURKISH (4-5 sentences) from DevOps, ending with question to Backend Dev.",
+      "async_execution": false,
+      "agent_id": "A_DevOps01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436996"
+    },
+    {
+      "id": "T_Defect04_BackendAnalysis",
+      "description": "Analyze DEF-3489 in TURKISH. Explain cause (missing database index on orders table after schema migration 2 weeks ago, table now has 2M+ records causing full table scans), estimate fix effort (4 saat for index creation + testing), mention this is quick win, and ask Tech Lead if this should be prioritized given easy fix.",
+      "expected_output": "Backend analysis in TURKISH (4-5 sentences) from Backend Dev, highlighting quick fix opportunity, ending with question to Tech Lead.",
+      "async_execution": false,
+      "agent_id": "A_BackendDev01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.436998"
+    },
+    {
+      "id": "T_Defect04_TechLeadDecision",
+      "description": "Provide technical recommendation in TURKISH for DEF-3489. Strongly recommend fixing this immediately (4 saat effort, high impact, prevents further degradation), mention that database performance issues compound over time, note this is low risk (just adding index), and suggest doing this today if Backend Developer has capacity.",
+      "expected_output": "Technical recommendation in TURKISH (3-4 sentences) from Tech Lead, strongly advocating for immediate fix.",
+      "async_execution": false,
+      "agent_id": "A_TechLead01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.437000"
+    },
+    {
+      "id": "T_Defect04_PMApproval",
+      "description": "Approve priority in TURKISH for DEF-3489. Agree with Tech Lead recommendation (quick fix, high user impact, order tracking is frequently used feature), set priority as P1 given low effort and high return, and approve immediate fix in current sprint.",
+      "expected_output": "Priority approval in TURKISH (2-3 sentences) from Product Manager, approving immediate fix.",
+      "async_execution": false,
+      "agent_id": "A_ProductManager01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.437001"
+    },
+    {
+      "id": "T_Defect04_Summary",
+      "description": "Summarize decision for DEF-3489 in TURKISH. Confirm priority (P1 - quick win), assign to Backend Developer, set deadline (today - 4 saat), and express appreciation for identifying this quick win opportunity. Keep to 2-3 sentences with positive tone.",
+      "expected_output": "Decision summary in TURKISH (2-3 sentences) from Scrum Master, celebrating quick win.",
+      "async_execution": false,
+      "agent_id": "A_ScrumMaster01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.437003"
+    },
+    {
+      "id": "T_CloseSession",
+      "description": "Close the Defect Triage session in TURKISH. Summarize all decisions (4 defects triaged: 3xP1 with clear owners and timelines, 1xP2 deferred to next sprint), acknowledge team collaboration and technical insights, remind everyone of their commitments, check if anyone has concerns about workload, and thank everyone warmly. Keep to 4-5 sentences with supportive tone.",
+      "expected_output": "Session closing in TURKISH (4-5 sentences) from Scrum Master, summarizing decisions and showing appreciation.",
+      "async_execution": false,
+      "agent_id": "A_ScrumMaster01",
+      "context_from_async_tasks_ids": null,
+      "context_from_sync_tasks_ids": null,
+      "created_at": "2025-12-02T20:46:58.437005"
+    }
+  ],
+  "tools": []
+}

@@ -21,4 +21,3 @@ data/*
 db/
 db/*
 stop_venv.bat
-app/samples/*
