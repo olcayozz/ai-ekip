@@ -19,6 +19,11 @@ def load_secrets_fron_env():
             "ANTHROPIC_API_KEY": os.getenv("ANTHROPIC_API_KEY"),
             "OLLAMA_HOST": os.getenv("OLLAMA_HOST"),
             "XAI_API_KEY": os.getenv("XAI_API_KEY"),
+            "ABACUS_API_KEY": os.getenv("ABACUS_API_KEY"),
+            "ABACUS_API_BASE": os.getenv("ABACUS_API_BASE"),
+            "ABACUS_PROJECT_NAME": os.getenv("ABACUS_PROJECT_NAME"),
+            "ABACUS_MODELS": os.getenv("ABACUS_MODELS"),
+            "CREWAI_TRACING_ENABLED": os.getenv("CREWAI_TRACING_ENABLED"),
         }
     else:
         st.session_state.env_vars = st.session_state.env_vars
@@ -127,6 +132,30 @@ def create_lmstudio_llm(model, temperature):
     else:
         raise ValueError("LM Studio API base not set in .env file")
 
+def create_abacus_llm(model, temperature):
+    host = st.session_state.env_vars.get("ABACUS_API_BASE")
+    switch_environment({
+        "ABACUS_API_KEY": st.session_state.env_vars.get("ABACUS_API_KEY"),
+        "ABACUS_API_BASE": st.session_state.env_vars.get("ABACUS_API_BASE"),
+        "ABACUS_MODELS": model,
+        "OPENAI_API_KEY": st.session_state.env_vars.get("ABACUS_API_KEY"),
+        "OPENAI_API_BASE": st.session_state.env_vars["OLLAMA_HOST"],    # Nastaví OpenAI API Base na hodnotu OLLAMA_HOST
+    })
+    api_key = st.session_state.env_vars.get("ABACUS_API_KEY")
+
+    if not api_key:
+        raise ValueError("ABACUS_API_KEY must be set in .env file")
+
+    llm = LLM(
+        model=model, 
+        base_url=host,  
+        api_key=api_key,
+        temperature=temperature,
+        is_litellm=True,  
+    )
+    
+    return llm
+
 LLM_CONFIG = {
     "OpenAI": {
         "models": os.getenv("OPENAI_PROXY_MODELS", "").split(",") if os.getenv("OPENAI_PROXY_MODELS") else ["gpt-4.1-mini","gpt-4o-mini", "gpt-4o", "gpt-5-mini", "gpt-5-nano"],
@@ -151,6 +180,10 @@ LLM_CONFIG = {
      "Xai": {
         "models": ["xai/grok-2-1212", "xai/grok-beta"],
         "create_llm": create_xai_llm,
+    },
+     "AbacusAI": {
+        "models": os.getenv("ABACUS_MODELS", "").split(",") if os.getenv("ABACUS_MODELS") else [],
+        "create_llm": create_abacus_llm,
     },
 }
 

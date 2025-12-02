@@ -12,6 +12,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - back-tier
     ports:
       - "5432:5432"
 
@@ -29,6 +31,74 @@ services:
       # - DB_URL=${DB_URL}
     ports:
       - "8501:8501"
+    networks:
+      - front-tier
+      - back-tier
+    volumes:
+      - web-data:/app
+    deploy:
+      resources:
+        limits:
+          cpus: '8.0'
+          memory: 8G
+        reservations:
+          cpus: '4.0'
+          memory: 4G
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      "ollama serve &
+      sleep 10 &&
+      ollama pull hf.co/HuggingFaceTB/SmolLM2-360M-Instruct-GGUF:Q8_0 &&
+      ollama pull smollm &&
+      ollama pull smollm2 &&
+      tail -f /dev/null"
+    restart: unless-stopped
+    networks:
+      - back-tier
+    deploy:
+      resources:
+        limits:
+          cpus: '8.0'
+          memory: 12G
+        reservations:
+          cpus: '4.0'
+          memory: 8G
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    depends_on:
+      - ollama
+    restart: unless-stopped
+    networks:
+      - back-tier
+      - front-tier
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
 
 volumes:
   db-data:
+  web-data:
+  ollama_data:
+
+networks:
+  front-tier:
+  back-tier:
